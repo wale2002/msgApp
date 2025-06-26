@@ -14,18 +14,21 @@ const BottomBar = () => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await getMe();
-        if (res.data.success) {
-          setUser(res.data.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch user:", error);
+  const fetchUser = async () => {
+    try {
+      const res = await getMe();
+      if (res.data.success && res.data.data) { // Check if res.data.data is defined
+        setUser(res.data.data);
+      } else {
+        setUser(null); // Handle the case where data is undefined
       }
-    };
-    fetchUser();
-  }, []);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+      setUser(null); // Handle error case
+    }
+  };
+  fetchUser();
+}, []);
 
   const handleLogout = async () => {
     try {
