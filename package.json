@@ -3,18 +3,41 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.3"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@heroicons/react": "^2.1.5",
+    "@mui/icons-material": "^7.1.1",
+    "@mui/material": "^7.1.1",
+    "@react-oauth/google": "^0.12.2",
+    "axios": "^1.10.0",
+    "daisyui": "^5.0.43",
+    "date-fns": "^4.1.0",
+    "firebase": "^11.9.1",
+    "framer-motion": "^12.17.3",
+    "google-auth-library": "^9.14.2",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "lucide-react": "^0.515.0",
+    "next": "^15.3.3",
+    "next-cloudinary": "^6.16.0",
+    "pusher-js": "^8.4.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/lodash": "^4.17.18",
+    "@types/react": "19.1.8",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.5",
+    "tailwindcss": "^4.1.10",
+    "typescript": "5.8.3"
   }
 }

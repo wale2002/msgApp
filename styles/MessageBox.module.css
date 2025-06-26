@@ -1,0 +1,48 @@
+/* styles/MessageBox.module.css */
+.message {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 10px;
+  max-width: 70%;
+  align-self: auto; /* Reset to ensure parent controls alignment */
+}
+
+.messageSent {
+  align-self: flex-end !important; /* Force right alignment */
+  background-color: #ff4d4f; /* Red for sent messages */
+  color: white;
+  border-radius: 10px 10px 0 10px;
+  padding: 8px 12px;
+}
+
+.messageReceived {
+  align-self: flex-start !important; /* Force left alignment */
+  background-color: #f0f0f0; /* Gray for received messages */
+  color: black;
+  border-radius: 10px 10px 10px 0;
+  padding: 8px 12px;
+}
+
+.messageContent {
+  word-wrap: break-word;
+}
+
+.messageImage {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.senderName {
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #737373;
+  margin-bottom: 4px;
+}
+
+.messageTime {
+  font-size: 0.8em;
+  opacity: 0.7;
+  text-align: right;
+  margin-top: 4px;
+}

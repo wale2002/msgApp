@@ -1,0 +1,215 @@
+/* appfolder/styles/Contacts.module.css */
+.createChatContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 16px;
+}
+
+.inputSearch {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #333333;
+  outline: none;
+  margin-bottom: 16px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputSearch::placeholder {
+  color: #737373;
+}
+
+.inputSearch:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 4px rgba(255, 77, 79, 0.2);
+}
+
+.contactBar {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.contactList {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  max-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 12px;
+}
+
+.contactWrapper {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contactWrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.contactWrapper::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 3px;
+}
+
+.contactWrapper::-webkit-scrollbar-thumb {
+  background: #ff4d4f;
+  border-radius: 3px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+.contact:hover {
+  background-color: #f0f0f0;
+}
+
+.profilePhoto {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e0e0e0;
+}
+
+.contactName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.createChat {
+  flex: 1;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroupName {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333333;
+  outline: none;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.inputGroupName::placeholder {
+  color: #737373;
+}
+
+.inputGroupName:focus {
+  border-color: #ff4d4f;
+}
+
+.selectedContacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selectedContact {
+  background-color: #ff4d4f;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.createButton {
+  padding: 12px;
+  background-color: #ff4d4f;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.createButton:hover {
+  background-color: #e63946;
+}
+
+.createButton:disabled {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .contactBar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .contactList,
+  .createChat {
+    max-height: none;
+  }
+
+  .contactWrapper {
+    max-height: 50vh;
+  }
+
+  .inputSearch,
+  .inputGroupName {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .sectionTitle {
+    font-size: 14px;
+  }
+
+  .contactName {
+    font-size: 13px;
+  }
+
+  .createButton {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .selectedContact {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .profilePhoto {
+    width: 36px;
+    height: 36px;
+  }
+}

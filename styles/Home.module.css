@@ -1,0 +1,145 @@
+/* Custom properties defined within the container class for CSS Modules compatibility */
+.container {
+  --primary-color: #007bff;
+  --text-color: #1a1a1a;
+  --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #e6e9ff 100%);
+  --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg-gradient);
+  overflow: hidden;
+}
+
+/* Hero section with flexbox for side-by-side layout */
+.hero {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Content wrapper for text and button */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+}
+
+/* Title styling with modern typography */
+.title {
+  color: var(--text-color);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Subtitle for additional context */
+.subtitle {
+  color: #4a4a4a;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Logo container for responsive image */
+.logo {
+  max-width: 100%;
+  filter: drop-shadow(var(--shadow));
+}
+
+/* Ensure image scales responsively */
+.logoImage {
+  object-fit: contain;
+  width: min(400px, 80vw);
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.logoImage:hover {
+  transform: scale(1.05);
+}
+
+/* Modern button styling with gradient and hover effect */
+.button {
+  font: inherit;
+  background: linear-gradient(90deg, var(--primary-color), #005bb5);
+  border: none;
+  color: #fff;
+  border-radius: 0.75rem;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .content {
+    align-items: center;
+  }
+
+  .title {
+    font-size: clamp(2rem, 4.5vw, 2.5rem);
+  }
+
+  .subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+  }
+
+  .button {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    padding: 0.6rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .logoImage {
+    width: min(300px, 90vw);
+  }
+
+  .title {
+    font-size: clamp(1.75rem, 4vw, 2rem);
+  }
+
+  .button {
+    font-size: 1rem;
+    padding: 0.5rem 1.25rem;
+  }
+}

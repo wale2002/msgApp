@@ -1,0 +1,117 @@
+/* styles/TopBar.module.css */
+
+.topbar {
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+}
+
+.logo {
+  width: clamp(32px, 8vw, 40px); /* Responsive size */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Prevent stretching */
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.logo:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 4vw, 24px); /* Responsive gap */
+}
+
+.menuLink {
+  font-size: 16px;
+  font-weight: 600; /* Match .text-heading4-bold */
+  color: #333; /* Neutral color for inactive links */
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 4px 8px; /* Clickable area */
+}
+
+.menuLink:hover {
+  color: #ff4d4f; /* Hover matches active state */
+  transform: translateY(-1px); /* Subtle lift */
+}
+
+.menuLinkActive {
+  color: #ff4d4f; /* Active link style */
+  font-weight: 700; /* Bolder for emphasis */
+}
+
+.profileImage {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  transition: transform 0.3s ease, 0 2px 4px rgba(0, 0, 0, 0.1) 0.3s ease;
+}
+
+.profileImage:hover {
+  transform: scale(1.05); /* Slight zoom */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15); /* Glow effect */
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between image and name */
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: 700; /* Match .text-heading-bold */
+  color: #333;
+}
+
+.logoutButton {
+  cursor: pointer;
+  color: #737373; /* Neutral grey */
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: 24px;
+  height: 24px;
+}
+
+.logoutButton:hover {
+  color: #ff4d4f; /* Red on hover */
+  transform: scale(1.1); /* Slight zoom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 10px 16px;
+  }
+
+  .logo {
+    width: 32px;
+  }
+
+  .menu {
+    gap: 16px;
+  }
+
+  .menuLink {
+    font-size: 14px;
+  }
+
+  .profileImage {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userName {
+    font-size: 14px;
+  }
+}
