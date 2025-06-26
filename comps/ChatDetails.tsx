@@ -277,42 +277,45 @@ const ChatDetails = ({ chatId, messages, onRetrySend }: ChatDetailsProps) => {
 
   return (
     <div className={styles.chatDetails}>
-      <div className={styles.chatHeader}>
-        {otherMembers.length > 0 && (
-          <>
-            {otherMembers[0]?.profilePicture ? (
-              <CldImage
-                src={otherMembers[0].profilePicture}
-                width={40}
-                height={40}
-                alt={`${otherMembers[0].name || "User"}'s profile`}
-                className={styles.profilePhoto}
-                crop="fill"
-                gravity="face"
-                onError={(e) => (e.currentTarget.src = "/assets/person.png")}
-              />
-            ) : (
-              <img
-                src="/assets/person.png"
-                alt="Default profile"
-                className={styles.profilePhoto}
-              />
-            )}
-            <div className={styles.text}>
-              <p className={styles.textBaseBold}>{otherMembers[0]?.name}</p>
-            </div>
-          </>
-        )}
+      <div className={styles.chatHeader} role="region" aria-label="Chat participant">
+  {otherMembers.length > 0 && (
+    <>
+      {otherMembers[0]?.profilePicture ? (
+        <CldImage
+          src={otherMembers[0].profilePicture}
+          width={40}
+          height={40}
+          alt={`${otherMembers[0].name || "User"}'s profile picture`}
+          className={styles.profilePhoto}
+          crop="fill"
+          gravity="face"
+          onError={(e) => (e.currentTarget.src = "/assets/person.png")}
+        />
+      ) : (
+        <img
+          src="/assets/person.png"
+          alt="Default profile picture"
+          className={styles.profilePhoto}
+        />
+      )}
+      <div className={styles.text}>
+        <p className={styles.textBaseBold}>
+          {otherMembers[0]?.name || "Unknown User"}
+        </p>
       </div>
+    </>
+  )}
+</div>
 
       <div
-        className={styles.chatBody}
-        onScroll={(e) => {
-          e.stopPropagation();
-          handleScroll();
-        }}
-        ref={messagesContainerRef}
-      >
+  className={styles.chatBody}
+  onScroll={(e) => {
+    e.stopPropagation();
+    handleScroll();
+  }}
+  ref={messagesContainerRef}
+  style={{ maxHeight: "calc(100% - 120px)" }} /* Adjust for header and sendMessage heights */
+>
         {loading && page > 1 && (
           <div className={styles.loading}>Loading more messages...</div>
         )}

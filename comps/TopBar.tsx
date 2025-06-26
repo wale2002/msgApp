@@ -1,129 +1,3 @@
-// // comps/TopBar.tsx
-// "use client";
-
-// import { Logout } from "@mui/icons-material";
-// import Link from "next/link";
-// import { usePathname, useRouter } from "next/navigation";
-// import { useState, useEffect } from "react";
-// import { getMe, User, logout, loadAuthToken } from "../lib/api";
-// import { CldImage } from "next-cloudinary";
-// import styles from "../styles/TopBar.module.css";
-
-// const TopBar = () => {
-//   const pathname = usePathname();
-//   const router = useRouter();
-//   const [user, setUser] = useState<User | null>(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchUser = async () => {
-//       try {
-//         loadAuthToken();
-//         const token = localStorage.getItem("authToken");
-//         console.log("TopBar token:", token?.substring(0, 10) + "...");
-//         if (!token) throw new Error("No auth token found");
-//         const res = await getMe();
-//         if (!res.data.success || !res.data.data) {
-//           throw new Error("Failed to fetch user");
-//         }
-//         setUser(res.data.data);
-//       } catch (error) {
-//         console.error("Failed to fetch user:", error);
-//         router.push("/auth");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     fetchUser();
-//   }, [router]);
-
-//   const handleLogout = async () => {
-//     try {
-//       await logout();
-//       localStorage.removeItem("authToken");
-//       router.push("/auth");
-//     } catch (error) {
-//       console.error("Logout error:", error);
-//       router.push("/auth");
-//     }
-//   };
-
-//   if (loading) return null;
-
-//   return (
-//     <nav className={styles.topbar} aria-label="Main navigation">
-//       <Link href="/chats" aria-label="Home">
-//         <img src="/assets/logo.png" alt="App Logo" className={styles.logo} />
-//       </Link>
-//       <div className={styles.menu}>
-//         {user ? (
-//           <>
-//             <Link
-//               href="/chats"
-//               className={`${styles.menuLink} ${
-//                 pathname === "/chats" ? styles.menuLinkActive : ""
-//               }`}
-//               aria-current={pathname === "/chats" ? "page" : undefined}
-//             >
-//               Chats
-//             </Link>
-//             <Link
-//               href="/contacts"
-//               className={`${styles.menuLink} ${
-//                 pathname === "/contacts" ? styles.menuLinkActive : ""
-//               }`}
-//               aria-current={pathname === "/contacts" ? "page" : undefined}
-//             >
-//               Contacts
-//             </Link>
-//             <button
-//               className={styles.logoutButton}
-//               onClick={handleLogout}
-//               aria-label="Logout"
-//             >
-//               <Logout />
-//             </button>
-//             <Link href="/profile" aria-label="Profile">
-//               <div className={styles.userInfo}>
-//                 {user.profilePicture ? (
-//                   <CldImage
-//                     src={user.profilePicture}
-//                     width={36}
-//                     height={36}
-//                     alt={`${user.name || "User"}'s profile`}
-//                     className={styles.profileImage}
-//                     crop="fill"
-//                     gravity="face"
-//                     onError={(e) =>
-//                       (e.currentTarget.src = "/assets/person.png")
-//                     }
-//                   />
-//                 ) : (
-//                   <img
-//                     src="/assets/person.png"
-//                     alt="Default profile"
-//                     className={styles.profileImage}
-//                   />
-//                 )}
-//                 <span className={styles.userName}>{user.name}</span>
-//               </div>
-//             </Link>
-//           </>
-//         ) : (
-//           <Link
-//             href="/auth"
-//             className={`${styles.menuLink} ${
-//               pathname === "/auth" ? styles.menuLinkActive : ""
-//             }`}
-//             aria-current={pathname === "/auth" ? "page" : undefined}
-//           >
-//             Login
-//           </Link>
-//         )}
-//       </div>
-//     </nav>
-//   );
-// };
 
 // export default TopBar;
 "use client";
@@ -227,31 +101,29 @@ const TopBar = () => {
             <button onClick={handleLogout} aria-label="Logout">
               <Logout />
             </button>
-            <Link href="/profile" aria-label="Profile">
-              <div className={styles.userInfo}>
-                {user.profilePicture ? (
-                  <CldImage
-                    src={user.profilePicture}
-                    width={36}
-                    height={36}
-                    alt={`${user.name || "User"}'s profile`}
-                    className={styles.profileImage}
-                    crop="fill"
-                    gravity="face"
-                    onError={(e) =>
-                      (e.currentTarget.src = "/assets/person.png")
-                    }
-                  />
-                ) : (
-                  <img
-                    src="/assets/person.png"
-                    alt="Default profile"
-                    className={styles.profileImage}
-                  />
-                )}
-                <span className={styles.userName}>{user.name}</span>
-              </div>
-            </Link>
+            <Link href="/profile" aria-label={`Profile of ${user.name || "User"}`}>
+  <div className={styles.userInfo}>
+    {user.profilePicture ? (
+      <CldImage
+        src={user.profilePicture}
+        width={36}
+        height={36}
+        alt={`${user.name || "User"}'s profile`}
+        className={styles.profileImage}
+        crop="fill"
+        gravity="face"
+        onError={(e) => (e.currentTarget.src = "/assets/person.png")}
+      />
+    ) : (
+      <img
+        src="/assets/person.png"
+        alt="Default profile"
+        className={styles.profileImage}
+      />
+    )}
+    <span className={styles.userName}>{user.name}</span>
+  </div>
+</Link>
           </>
         ) : (
           <Link

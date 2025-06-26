@@ -1,39 +1,28 @@
-/* appfolder/styles/BottomBar.module.css */
+/* styles/BottomBar.module.css */
 .bottomBar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 16px;
+  background: #fff;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #ffffff;
-  padding: 12px 16px;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05);
   z-index: 1000;
 }
 
 .link {
-  color: #333333;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: clamp(14px, 4vw, 16px);
+  color: #333;
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 12px;
 }
 
 .activeLink {
-  color: #ff4d4f;
-}
-
-.logoutIcon {
-  color: #737373;
-  font-size: 24px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.logoutIcon:hover {
-  color: #ff4d4f;
+  color: #3b82f6;
+  font-weight: 600;
 }
 
 .profilePhoto {
@@ -41,24 +30,19 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #e0e0e0;
 }
 
 @media (max-width: 768px) {
   .bottomBar {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
 
   .link {
-    font-size: 14px;
-  }
-
-  .logoutIcon {
-    font-size: 22px;
+    padding: 10px;
   }
 
   .profilePhoto {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
   }
 }

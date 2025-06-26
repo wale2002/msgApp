@@ -6,53 +6,107 @@
   --bg-color: #f9f9f9;
 }
 
+* {
+  box-sizing: border-box; /* Prevent padding/margin issues */
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #f2f2f2;
   color: #333;
   font-family: "Nunito", sans-serif;
+  font-size: clamp(16px, 4vw, 18px); /* Fluid font size for readability */
+  line-height: 1.5; /* Improved readability */
 }
 
 a {
   color: #333;
   text-decoration: none;
+  display: inline-block; /* Ensure touch target size */
+  padding: 8px; /* Minimum touch target size */
 }
 
+/* Mobile-first content container */
 .content {
-  max-width: 960px;
+  width: 100%;
+  max-width: 960px; /* Maintain max-width for larger screens */
   margin: 0 auto;
+  padding: 0 16px; /* Responsive padding */
 }
 
+/* Navigation */
 nav {
-  margin: 10px auto 80px;
-  padding: 10px 0;
+  margin: 16px auto 32px; /* Reduced margin for mobile */
+  padding: 8px 0;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  flex-direction: column; /* Stack items on mobile */
+  align-items: center;
   border-bottom: 1px solid #ddd;
 }
 
-nav a {
-  margin-left: 12px;
-}
-
 nav .logo {
-  margin-right: auto;
+  margin-bottom: 12px; /* Space below logo on mobile */
 }
 
+nav a {
+  margin: 8px 0; /* Vertical spacing for touch targets */
+  padding: 12px; /* Larger touch area */
+  font-size: clamp(16px, 4vw, 18px);
+}
+
+/* Footer */
 footer {
   display: block;
   text-align: center;
-  padding: 30px 0;
-  margin-top: 60px;
+  padding: 24px 16px; /* Adjusted for mobile */
+  margin-top: 32px;
   color: #777;
   border-top: 1px solid #eaeaea;
+  font-size: clamp(14px, 3.5vw, 16px);
 }
 
+/* Not Found */
 .not-found {
   text-align: center;
+  padding: 16px;
 }
 
 .not-found a {
   color: #4979ff;
   text-decoration: underline;
+  padding: 8px 12px;
+}
+
+/* Responsive adjustments for larger screens */
+@media (min-width: 768px) {
+  nav {
+    flex-direction: row; /* Horizontal nav on larger screens */
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 10px auto 80px; /* Restore original margins */
+  }
+
+  nav .logo {
+    margin-bottom: 0;
+    margin-right: auto; /* Restore logo positioning */
+  }
+
+  nav a {
+    margin: 0 0 0 12px; /* Restore horizontal spacing */
+  }
+
+  .content {
+    padding: 0 24px; /* Slightly larger padding */
+  }
+
+  footer {
+    padding: 30px 0; /* Restore original padding */
+    margin-top: 60px;
+  }
+}
+
+/* Ensure no horizontal overflow */
+html, body, .content {
+  overflow-x: hidden;
 }
