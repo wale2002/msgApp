@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useGoogleAuth } from "../lib/useGoogleAuth";
+// import { useGoogleAuth } from "../lib/useGoogleAuth";
 import styles from "../styles/Form.module.css";
 
 export interface FormData {
@@ -49,10 +49,10 @@ export default function AuthPage({ onSubmit, onLogout }: Props) {
     message: "",
     show: false,
   });
-  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  // const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const emailInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { handleGoogleLogin, handleGoogleLogout } = useGoogleAuth();
+  // const { handleGoogleLogin, handleGoogleLogout } = useGoogleAuth();
 
   useEffect(() => {
     setFormData({
@@ -115,58 +115,58 @@ export default function AuthPage({ onSubmit, onLogout }: Props) {
     }
   };
 
-  const handleSignOut = async () => {
-    setAlert({ type: "loading", message: "Signing out...", show: true });
-    try {
-      const result = await onLogout();
-      await handleGoogleLogout();
-      setAlert({
-        type: "success",
-        message: result.message || "Signed out successfully!",
-        show: true,
-      });
-      setTimeout(() => router.push("/"), 1000);
-    } catch (error: any) {
-      setAlert({
-        type: "error",
-        message:
-          error.response?.data?.message || error.message || "Sign-out failed.",
-        show: true,
-      });
-    } finally {
-      setTimeout(() => setAlert({ type: "", message: "", show: false }), 3000);
-    }
-  };
+  // const handleSignOut = async () => {
+  //   setAlert({ type: "loading", message: "Signing out...", show: true });
+  //   try {
+  //     const result = await onLogout();
+  //     // await handleGoogleLogout();
+  //     setAlert({
+  //       type: "success",
+  //       message: result.message || "Signed out successfully!",
+  //       show: true,
+  //     });
+  //     setTimeout(() => router.push("/"), 1000);
+  //   } catch (error: any) {
+  //     setAlert({
+  //       type: "error",
+  //       message:
+  //         error.response?.data?.message || error.message || "Sign-out failed.",
+  //       show: true,
+  //     });
+  //   } finally {
+  //     setTimeout(() => setAlert({ type: "", message: "", show: false }), 3000);
+  //   }
+  // };
 
-  const handleGoogleSignIn = async () => {
-    setIsGoogleLoading(true);
-    try {
-      await handleGoogleLogin(
-        (data) => {
-          setAlert({
-            type: "success",
-            message: "Google Sign-In successful!",
-            show: true,
-          });
-          setTimeout(() => router.push("/chats"), 1000);
-        },
-        (error: any) => {
-          throw new Error(
-            error.response?.data?.message || "Google Sign-In failed"
-          );
-        }
-      );
-    } catch (error: any) {
-      setAlert({
-        type: "error",
-        message: error.message || "Google Sign-In failed.",
-        show: true,
-      });
-    } finally {
-      setIsGoogleLoading(false);
-      setTimeout(() => setAlert({ type: "", message: "", show: false }), 3000);
-    }
-  };
+  // const handleGoogleSignIn = async () => {
+  //   setIsGoogleLoading(true);
+  //   try {
+  //     await handleGoogleLogin(
+  //       (data) => {
+  //         setAlert({
+  //           type: "success",
+  //           message: "Google Sign-In successful!",
+  //           show: true,
+  //         });
+  //         setTimeout(() => router.push("/chats"), 1000);
+  //       },
+  //       (error: any) => {
+  //         throw new Error(
+  //           error.response?.data?.message || "Google Sign-In failed"
+  //         );
+  //       }
+  //     );
+  //   } catch (error: any) {
+  //     setAlert({
+  //       type: "error",
+  //       message: error.message || "Google Sign-In failed.",
+  //       show: true,
+  //     });
+  //   } finally {
+  //     setIsGoogleLoading(false);
+  //     setTimeout(() => setAlert({ type: "", message: "", show: false }), 3000);
+  //   }
+  // };
 
   const formVariants = {
     initial: (direction: number) => ({

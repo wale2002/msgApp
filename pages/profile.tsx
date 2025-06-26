@@ -13,11 +13,14 @@ export default function Profile() {
     const fetchUser = async () => {
       try {
         const res = await getMe();
-        if (res.data.success) {
-          setUser(res.data.data);
+        if (res.data.success && res.data.data) {
+          setUser(res.data.data); // Only set if data is defined
+        } else {
+          setUser(null); // Handle undefined case
         }
       } catch (error) {
         console.error("Failed to fetch user:", error);
+        setUser(null); // Handle error case
       }
     };
     fetchUser();
