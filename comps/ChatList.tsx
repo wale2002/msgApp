@@ -12,7 +12,11 @@ import {
 } from "../lib/api";
 import { onMessageSent, onNewChat } from "../lib/events";
 import ChatBox from "./ChatBox";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import Loader from "./Loader";
+import { Logout, Contacts } from "@mui/icons-material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import styles from "../styles/ChatList.module.css";
 
 let pusherInstance: Pusher | null = null;
@@ -56,6 +60,17 @@ const ChatList = ({ currentChatId, onChatSelect }: ChatListProps) => {
   const [search, setSearch] = useState("");
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Call your logout logic or redirect
+    localStorage.removeItem("authToken");
+    router.push("/auth");
+  };
+
+  const handleContacts = () => {
+    router.push("/contacts");
+  };
 
   const getChatList = async (isPolling = false) => {
     try {
@@ -321,6 +336,7 @@ const ChatList = ({ currentChatId, onChatSelect }: ChatListProps) => {
   return (
     <div className={styles.chatList} aria-label="Chat list">
       {error && <p className={styles.error}>{error}</p>}
+
       <input
         placeholder="Search chat..."
         className={styles.inputSearch}
@@ -328,6 +344,7 @@ const ChatList = ({ currentChatId, onChatSelect }: ChatListProps) => {
         onChange={(e) => setSearch(e.target.value)}
         aria-label="Search chats"
       />
+
       <div className={styles.chats}>
         {chats.length > 0 ? (
           chats.map((chat) => (
@@ -342,6 +359,27 @@ const ChatList = ({ currentChatId, onChatSelect }: ChatListProps) => {
         ) : (
           <p className={styles.noChats}>No chats found</p>
         )}
+      </div>
+      <div className={styles.topBar}>
+        <button
+          onClick={handleContacts}
+          aria-label="Go to Contacts"
+          className={styles.iconButton}
+        >
+          <Contacts />
+        </button>
+        <Link href="/profile" passHref>
+          <button className={styles.iconButton} aria-label="Profile">
+            <AccountCircleIcon fontSize="large" />
+          </button>
+        </Link>
+        <button
+          onClick={handleLogout}
+          aria-label="Logout"
+          className={styles.iconButton}
+        >
+          <Logout />
+        </button>
       </div>
     </div>
   );

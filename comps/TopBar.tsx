@@ -1,4 +1,3 @@
-
 // export default TopBar;
 "use client";
 
@@ -101,29 +100,34 @@ const TopBar = () => {
             <button onClick={handleLogout} aria-label="Logout">
               <Logout />
             </button>
-            <Link href="/profile" aria-label={`Profile of ${user.name || "User"}`}>
-  <div className={styles.userInfo}>
-    {user.profilePicture ? (
-      <CldImage
-        src={user.profilePicture}
-        width={36}
-        height={36}
-        alt={`${user.name || "User"}'s profile`}
-        className={styles.profileImage}
-        crop="fill"
-        gravity="face"
-        onError={(e) => (e.currentTarget.src = "/assets/person.png")}
-      />
-    ) : (
-      <img
-        src="/assets/person.png"
-        alt="Default profile"
-        className={styles.profileImage}
-      />
-    )}
-    <span className={styles.userName}>{user.name}</span>
-  </div>
-</Link>
+            <Link
+              href="/profile"
+              aria-label={`Profile of ${user.name || "User"}`}
+            >
+              <div className={styles.userInfo}>
+                {user.profilePicture ? (
+                  <CldImage
+                    src={user.profilePicture}
+                    width={36}
+                    height={36}
+                    alt={`${user.name || "User"}'s profile`}
+                    className={styles.profileImage}
+                    crop="fill"
+                    gravity="face"
+                    onError={(e) =>
+                      (e.currentTarget.src = "/assets/person.png")
+                    }
+                  />
+                ) : (
+                  <img
+                    src="/assets/person.png"
+                    alt="Default profile"
+                    className={styles.profileImage}
+                  />
+                )}
+                <span className={styles.userName}>{user.name}</span>
+              </div>
+            </Link>
           </>
         ) : (
           <Link

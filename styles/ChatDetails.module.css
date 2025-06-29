@@ -17,6 +17,13 @@
   position: sticky;
   top: 0;
   z-index: 900;
+  min-height: 60px; /* Consistent height even when empty */
+}
+
+/* Style for empty chatHeader to avoid visual gap */
+.chatHeader:empty {
+  background-color: #f9f9f9; /* Subtle background to indicate empty state */
+  border-bottom: 1px solid #e0e0e0; /* Maintain border for consistency */
 }
 
 .profilePhoto {
@@ -36,6 +43,8 @@
 .text {
   margin-left: 12px;
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .textBaseBold {
@@ -51,7 +60,7 @@
   padding: 0 16px; /* Equal padding on left and right */
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Adjust for header and input */
+  gap: 8px;
 }
 
 /* Webkit browsers (Chrome, Safari) */
@@ -136,6 +145,11 @@
 @media (max-width: 768px) {
   .chatHeader {
     padding: 10px 16px;
+    min-height: 50px; /* Slightly smaller for mobile */
+  }
+
+  .chatHeader:empty {
+    min-height: 50px; /* Match mobile min-height */
   }
 
   .profilePhoto {
@@ -149,7 +163,7 @@
 
   .chatBody {
     padding: 16px;
-    max-height: calc(100vh - 120px); /* Adjust for smaller screens */
+    max-height: calc(100vh - 110px); /* Adjusted for smaller header and input */
   }
 
   .sendMessage {

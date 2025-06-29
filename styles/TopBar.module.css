@@ -40,12 +40,12 @@
 }
 
 .menuLink:hover {
-  color: #ff4d4f; /* Hover matches active state */
+  color: #007bff;
   transform: translateY(-1px); /* Subtle lift */
 }
 
 .menuLinkActive {
-  color: #ff4d4f; /* Active link style */
+  color: #007bff;
   font-weight: 700; /* Bolder for emphasis */
 }
 
@@ -84,7 +84,7 @@
 }
 
 .logoutButton:hover {
-  color: #ff4d4f; /* Red on hover */
+  color: #007bff;
   transform: scale(1.1); /* Slight zoom */
 }
 

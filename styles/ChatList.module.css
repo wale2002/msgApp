@@ -300,3 +300,24 @@
     font-size: 12px;
   }
 }
+
+.topBar {
+  display: flex;
+  justify-content: space-between; /* pushes them to opposite ends */
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 12px;
+}
+
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #444;
+  padding: 6px;
+  font-size: 24px;
+}
+
+.iconButton:hover {
+  color: #007bff;
+}

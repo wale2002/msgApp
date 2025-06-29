@@ -1,12 +1,12 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ChatList from "../../comps/ChatList";
 import ChatDetails from "../../comps/ChatDetails";
-import TopBar from "../../comps/TopBar";
-import BottomBar from "../../comps/BottomBar";
+// import TopBar from "../../comps/TopBar";
+// import BottomBar from "../../comps/BottomBar";
+
 import Loader from "../../comps/Loader";
 import { getMessages, Message, sendMessage } from "../../lib/api";
 import { onMessageSent, subscribeToChat } from "../../lib/events";
@@ -220,9 +220,9 @@ export default function ChatPage() {
   return (
     <ErrorBoundary>
       <div className={styles.chatPage}>
-        <div className={styles.topBar}>
-          <TopBar />
-        </div>
+        {!selectedChatId && (
+          <div className={styles.topBar}>{/* <TopBar /> */}</div>
+        )}
         <div className={styles.content}>
           <aside
             className={`${styles.chatListSidebar} ${
@@ -250,7 +250,6 @@ export default function ChatPage() {
                 <ChatDetails
                   chatId={selectedChatId}
                   messages={messages}
-                  key={selectedChatId}
                   onRetrySend={handleRetrySend}
                 />
               </>
@@ -261,9 +260,9 @@ export default function ChatPage() {
             )}
           </main>
         </div>
-        <div className={styles.bottomBar}>
-          <BottomBar />
-        </div>
+        {!selectedChatId && (
+          <div className={styles.bottomBar}>{/* <BottomBar /> */}</div>
+        )}
       </div>
     </ErrorBoundary>
   );

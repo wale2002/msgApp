@@ -825,6 +825,7 @@ export interface Message {
   id: string;
   sender: string;
   senderName: string;
+  senderPhoto?: string;
   content: string;
   photo?: string;
   timestamp: string;
