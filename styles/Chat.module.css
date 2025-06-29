@@ -2,7 +2,8 @@
 .chatPage {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
+  min-height: 100vh; /* Ensures consistent full viewport height */
 }
 
 .topBar {
@@ -15,14 +16,17 @@
 .content {
   display: flex;
   flex: 1;
-  overflow: hidden; /* Prevent overflow issues */
+  overflow: hidden;
+  height: 100%; /* ✅ Ensure the flex container takes full height */
 }
 
 .chatListSidebar {
-  width: 300px; /* Fixed width for chat list */
+  width: 300px;
   border-right: 1px solid #e0e0e0;
   overflow-y: auto;
   background-color: #fff;
+  height: 100%; /* ✅ Ensures it fills available vertical space */
+  max-height: 100vh; /* ✅ Prevents overflow past viewport */
 }
 
 .chatDetails {
