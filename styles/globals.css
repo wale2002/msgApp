@@ -107,6 +107,8 @@ footer {
 }
 
 /* Ensure no horizontal overflow */
-html, body, .content {
+html,
+body,
+.content {
   overflow-x: hidden;
 }

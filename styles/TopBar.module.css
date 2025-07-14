@@ -1,23 +1,25 @@
 /* styles/TopBar.module.css */
 
 .topbar {
-  width: 100%;
-  margin: 0;
-  padding: 8px 16px;
+  height: 60px; /* or 64px */
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 16px; /* remove vertical padding */
+  box-sizing: border-box;
   background-color: #fff;
   border-bottom: 1px solid #e0e0e0;
-  box-sizing: border-box;
 }
 
 .logo {
-  width: clamp(32px, 8vw, 40px); /* Responsive size */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Prevent stretching */
+  display: block;
+  align-self: center; /* ⬅ ensure vertical centering */
+  width: clamp(32px, 8vw, 40px);
+  height: auto;
+  object-fit: contain;
+  margin: 0; /* ⬅ prevent extra spacing */
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  transition: transform 0.3s ease;
 }
 
 .logo:hover {
@@ -91,7 +93,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .topbar {
-    padding: 10px 16px;
+    height: 56px;
+    padding: 0 12px;
   }
 
   .logo {

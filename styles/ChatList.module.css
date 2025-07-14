@@ -1,25 +1,46 @@
-/* styles/ChatList.module.css */
-
 /* Main chat list container */
 .chatList {
-  padding: 20px;
   max-width: 400px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+
+  /*border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;*/
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 100%;
+  padding: 10px;
   display: flex;
+
+  border-top-left-radius: 40px;
   flex-direction: column;
 }
 
 /* Error message */
 .error {
-  color: #dc3545;
+  color: #1e56a0; /* Aligned with Contacts.tsx CheckCircle */
   font-size: 14px;
   margin-bottom: 10px;
   text-align: center;
 }
 
+/* 🆕 Add thin line after each chat */
+.chats > * {
+  border-bottom: 1px solid #f5f6f5;
+}
+
+/* 🆕 Remove border from the last chat */
+.chats > *:last-child {
+  border-bottom: none;
+}
+.notificationBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+}
 /* Polling indicator */
 .pollingIndicator {
   font-size: 14px;
@@ -32,17 +53,31 @@
 .inputSearch {
   width: 100%;
   padding: 10px 12px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 11px;
+  border: none; /* Remove default border for cleaner look */
+  border-radius: 8px; /* Softer, modern rounded corners */
+  background-color: #585858; /* White background for contrast */
+  color: #dddddd; /* Text color from palette */
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transitions for multiple properties */
   margin-bottom: 15px;
-  transition: border-color 0.3s ease;
 }
 
 .inputSearch:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.15); /* Blue glow from palette (#007BFF) */
+  background-color: #515251; /* Slightly off-white on focus for subtle feedback */
+}
+
+.inputSearch:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+}
+
+.inputSearch::placeholder {
+  color: #c9c9c9; /* Placeholder color from palette */
+  opacity: 0.7; /* Subtle placeholder */
+  font-family: "Inter", sans-serif;
 }
 
 /* Chats container */
@@ -62,7 +97,7 @@
   padding: 20px;
 }
 
-/* ChatBox container */
+/* ChatBox/ContactBox container */
 .chatBox {
   display: flex;
   justify-content: space-between;
@@ -70,18 +105,24 @@
   padding: 12px;
   margin-bottom: 8px;
   border-radius: 8px; /* Curved radius */
-  background-color: #fff;
+
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .chatBox:hover {
-  background-color: #f5f5f5;
+  background-color: #353535;
+}
+
+.chatBox:focus {
+  outline: 2px solid #1e56a0; /* Accessibility, matches Contacts.tsx */
+  outline-offset: 2px;
 }
 
 .chatBoxActive {
-  background-color: #ffebeb; /* Highlight active chat */
+  background-color: #4a4a4a; /* Highlight active chat */
 }
+
 /* ChatBox expanded (full-height messages) */
 .chatBoxExpanded {
   display: flex;
@@ -111,39 +152,39 @@
 }
 
 .textBaseBold {
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
-  color: #333;
+  color: #ffffff;
   margin: 0;
 }
 
 .textSmallBold {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  color: #333;
+  color: #ffffff; /* Aligned with Contacts.tsx */
   margin: 0;
 }
 
 .textSmallMedium {
   font-size: 14px;
   font-weight: normal;
-  color: #666;
+  color: #ffffff;
   margin: 0;
 }
 
 .textGrey3 {
-  color: #666;
+  color: #ffffff;
 }
 
 .textBaseLight {
   font-size: 12px;
-  color: #666;
+  color: #ffffff;
   margin: 0;
 }
 
 .lastMessage {
-  font-size: 14px;
-  color: #333;
+  font-size: 10px;
+  color: #ffffff;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
@@ -179,7 +220,7 @@
 .messageReceived {
   align-self: flex-start;
   background-color: #e9ecef;
-  color: #333;
+  color: #ffffff;
 }
 
 .messageContent {
@@ -207,7 +248,7 @@
 
 .messageTime {
   font-size: 10px;
-  color: #666;
+  color: #ffffff;
   margin-top: 4px;
   align-self: flex-end;
 }
@@ -240,6 +281,7 @@
 
 .prepareMessage {
   flex: 1;
+
   display: flex;
   align-items: center;
   gap: 8px;
@@ -277,6 +319,76 @@
   height: 24px;
 }
 
+/* Top bar with buttons */
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 12px;
+}
+
+/* Icon buttons (e.g., Contacts, Profile, Logout) */
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 6px;
+  font-size: 24px;
+  transition: color 0.2s ease;
+}
+
+.iconButton:hover {
+  color: #000000; /* Aligned with Contacts.tsx */
+}
+
+.iconButton:focus {
+  outline: 2px solid #000000; /* Accessibility */
+  outline-offset: 2px;
+}
+
+/* Archive button */
+.archiveBtn {
+  margin-top: 4px;
+  padding: 4px 8px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.archiveBtn:hover {
+  background-color: #f0f0f0;
+}
+
+/* Delete button */
+/* styles/MessageBox.module.css */
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ffffff; /* Icon color */
+  font-size: 18px; /* Ensures icon size is consistent */
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 2px; /* Reduced padding for icon */
+  transition: color 0.2s ease-in-out;
+}
+
+.deleteButton:hover {
+  color: #1e56a0; /* Hover color for icon */
+}
+
+/* Section header (e.g., "Chats", "Contacts") */
+.sectionHeader {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 10px 0 5px 10px;
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
   .chatList {
@@ -299,25 +411,82 @@
   .inputField {
     font-size: 12px;
   }
-}
 
-.topBar {
+  .textBaseBold {
+    font-size: 14px;
+  }
+
+  .textSmallBold {
+    font-size: 12px;
+  }
+
+  .sectionHeader {
+    font-size: 14px;
+  }
+}
+.messagesTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 10px 0;
+  text-align: left;
+  padding: 5px;
+
+  border-radius: 5px;
+}
+.iconSidebar {
   display: flex;
-  justify-content: space-between; /* pushes them to opposite ends */
+  flex-direction: column;
+  width: 60px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  padding: 10px 0;
   align-items: center;
-  padding: 0 10px;
-  margin-bottom: 12px;
+  gap: 20px;
 }
 
 .iconButton {
   background: none;
   border: none;
   cursor: pointer;
-  color: #444;
-  padding: 6px;
-  font-size: 24px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .iconButton:hover {
-  color: #007bff;
+  background-color: #e0e0e0;
+}
+
+.iconButton.active {
+  background-color: #163172;
+  color: white;
+}
+
+/* Style for Material-UI Logout icon */
+.iconButton svg {
+  width: 24px;
+  height: 24px;
+  color: inherit; /* Ensure color matches button state */
+}
+
+/* Optional: Distinct hover effect for Logout button */
+.iconButton.logoutButton:hover {
+  background-color: #ff4d4f; /* Red hover effect for logout */
+  color: white;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .iconSidebar {
+    width: 50px;
+  }
+
+  .iconButton svg {
+    width: 20px; /* Slightly smaller icons on mobile */
+    height: 20px;
+  }
 }

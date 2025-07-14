@@ -1,36 +1,69 @@
-/* styles/MessageBox.module.css */
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  height: calc(100vh - 60px); /* Adjust for sidebar/header */
+  overflow-y: auto; /* Enable scrolling for long chats */
+  background-color: #1a1a1a; /* Match dark theme from Chat.module.css */
+}
+
 .message {
   display: flex;
   flex-direction: column;
-  margin: 8px 10px;
-  max-width: 70%;
-  align-self: auto; /* Reset to ensure parent controls alignment */
+  margin: 8px 0;
+  max-width: 70%; /* Limit message width */
 }
 
 .messageSent {
-  align-self: flex-end !important; /* Force right alignment */
-  background-color: #ff4d4f; /* Red for sent messages */
+  align-self: flex-end;
+  background-color: #163172; /* Blue for sent messages */
   color: white;
   border-radius: 10px 10px 0 10px;
   padding: 8px 12px;
+  position: relative;
+  margin-right: 15px; /* Increased for better edge spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .messageReceived {
-  align-self: flex-start !important; /* Force left alignment */
-  background-color: #f0f0f0; /* Gray for received messages */
-  color: black;
+  align-self: flex-start;
+  background-color: #ffffff; /* White for received messages */
+  color: #333;
   border-radius: 10px 10px 10px 0;
   padding: 8px 12px;
+  position: relative;
+  margin-left: 15px; /* Increased for better edge spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .messageContent {
-  word-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.messageImage {
-  max-width: 100%;
-  border-radius: 8px;
-  margin-top: 5px;
+.deleteButton {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.2s ease-in-out;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.deleteButton:hover {
+  color: #1e56a0;
+}
+
+.messageContent p,
+.messageContent .messageImage {
+  margin-right: 30px; /* Prevent overlap with delete button */
 }
 
 .senderName {
@@ -45,4 +78,24 @@
   opacity: 0.7;
   text-align: right;
   margin-top: 4px;
+}
+
+.messageDeleted {
+  background-color: #f0f0f0;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.deletedMessage {
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.messageImage {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 5px;
 }

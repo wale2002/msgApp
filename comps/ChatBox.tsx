@@ -1,13 +1,17 @@
-// comps/ChatBox.tsx
 import { format, isValid } from "date-fns";
 import { User, Conversation } from "../lib/api";
 import styles from "../styles/ChatList.module.css";
+import { useState } from "react";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Menu, MenuItem, IconButton } from "@mui/material";
 
 interface ChatBoxProps {
   chat: Conversation;
   currentUser: User | null;
   currentChatId?: string;
+  onDeleteChat?: (chatId: string) => void;
   onChatSelect?: (chatId: string) => void;
+  onToggleArchive?: (chatId: string) => void;
 }
 
 const ChatBox = ({
@@ -15,8 +19,12 @@ const ChatBox = ({
   currentUser,
   currentChatId,
   onChatSelect,
+  onToggleArchive,
+  onDeleteChat,
 }: ChatBoxProps) => {
   const isDev = process.env.NODE_ENV === "development";
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
   if (!chat.id) {
     console.warn("Chat with undefined id detected in ChatBox:", chat);
@@ -29,47 +37,9 @@ const ChatBox = ({
   const lastMessage = chat.lastMessage;
   const seen = lastMessage?.isRead;
 
-  // const formatTimestamp = (
-  //   timestamp: Date | string | number | undefined
-  // ): string => {
-  //   if (isDev) {
-  //     console.log("ChatBox timestamp debug:", {
-  //       chatId: chat.id,
-  //       timestamp,
-  //       type: typeof timestamp,
-  //       isNullOrEmpty:
-  //         !timestamp || (typeof timestamp === "string" && !timestamp.trim()),
-  //       source: lastMessage ? "lastMessage" : "createdAt",
-  //       rawChat: JSON.stringify(chat, null, 2),
-  //     });
-  //   }
-  //   if (
-  //     !timestamp ||
-  //     (typeof timestamp === "string" &&
-  //       (!timestamp.trim() ||
-  //         timestamp === "null" ||
-  //         timestamp === "undefined"))
-  //   ) {
-  //     return ""; // Hide timestamp for new chats
-  //   }
-  //   const date =
-  //     typeof timestamp === "number" ? new Date(timestamp) : new Date(timestamp);
-  //   return isValid(date) ? format(date, "p") : "";
-  // };
   const formatTimestamp = (
     timestamp: Date | string | number | null | undefined
   ): string => {
-    if (isDev) {
-      console.log("ChatBox timestamp debug:", {
-        chatId: chat.id,
-        timestamp,
-        type: typeof timestamp,
-        isNullOrEmpty:
-          !timestamp || (typeof timestamp === "string" && !timestamp.trim()),
-        source: lastMessage ? "lastMessage" : "createdAt",
-        rawChat: JSON.stringify(chat, null, 2),
-      });
-    }
     if (
       !timestamp ||
       timestamp === null ||
@@ -78,7 +48,7 @@ const ChatBox = ({
           timestamp === "null" ||
           timestamp === "undefined"))
     ) {
-      return ""; // Hide timestamp for new chats
+      return "";
     }
     const date =
       typeof timestamp === "number" ? new Date(timestamp) : new Date(timestamp);
@@ -87,7 +57,7 @@ const ChatBox = ({
 
   const chatName = chat.isGroupChat
     ? chat.groupName
-    : otherMembers[0]?.name || "Unnamed Chat";
+    : otherMembers[0]?.name || "....";
   const profilePhoto = chat.isGroupChat
     ? "/assets/group.png"
     : (
@@ -103,6 +73,31 @@ const ChatBox = ({
     if (onChatSelect) {
       onChatSelect(chat.id);
     }
+  };
+
+  const handleMenuClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation(); // Prevent triggering the parent div's onClick
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleArchiveClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the parent div's onClick
+    if (onToggleArchive) {
+      onToggleArchive(chat.id);
+    }
+    handleMenuClose();
+  };
+
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering the parent div's onClick
+    if (onDeleteChat) {
+      onDeleteChat(chat.id);
+    }
+    handleMenuClose();
   };
 
   const timestamp = formatTimestamp(
@@ -145,12 +140,37 @@ const ChatBox = ({
           )}
         </div>
       </div>
-      <div>
+
+      <div className={styles.chatBoxRight}>
         {timestamp && (
           <p className={`${styles.textBaseLight} ${styles.textGrey3}`}>
             {timestamp}
           </p>
         )}
+        <IconButton
+          aria-label="Chat options"
+          aria-controls={open ? `menu-${chat.id}` : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleMenuClick}
+          className={styles.menuButton}
+        >
+          <MoreVertIcon />
+        </IconButton>
+        <Menu
+          id={`menu-${chat.id}`}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleMenuClose}
+          MenuListProps={{
+            "aria-labelledby": `menu-button-${chat.id}`,
+          }}
+        >
+          <MenuItem onClick={handleArchiveClick}>
+            {chat.isArchived ? "Unarchive" : "Archive"}
+          </MenuItem>
+          <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
+        </Menu>
       </div>
     </div>
   );

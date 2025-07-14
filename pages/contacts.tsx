@@ -6,7 +6,7 @@ import BottomBar from "../comps/BottomBar";
 export default function ContactsPage() {
   return (
     <div className="contacts-page">
-      <TopBar />
+      {/* <TopBar /> */}
       <Contacts />
       <BottomBar />
     </div>

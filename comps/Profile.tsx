@@ -74,7 +74,7 @@ import { getMe, ExtendedUser } from "../lib/api";
 import { CldImage } from "next-cloudinary";
 import TopBar from "../comps/TopBar";
 import BottomBar from "../comps/BottomBar";
-import styles from "../styles/ProfilePage.module.css";
+import styles from "../styles/ProfilePage1.module.css";
 
 export default function Profile() {
   const [user, setUser] = useState<ExtendedUser | null>(null);
@@ -98,7 +98,7 @@ export default function Profile() {
 
   return (
     <div className={styles.profilePage}>
-      <TopBar />
+      {/* <TopBar /> */}
       <div className={styles.profileContainer}>
         {user ? (
           <>
